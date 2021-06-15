@@ -5,9 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style></style>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            background-color: black;
+        }
+
+        .findRabbitBtn{        
+            outline: none;    
+            color: white;
+            background-color: tomato;
+            cursor: pointer;
+        }
+
+        .img{
+            width: 120px;
+            height: 120px;
+        }
+    </style>
 </head>
 <body>
-    <script></script>
+    <button class="findRabbitBtn">Find a rabbit</button>
+    <img src="img/carrot.png" alt="carrot" class="img carrot">
+    <img src="img/carrot.png" alt="carrot" class="img carrot">
+    <img src="img/carrot.png" alt="carrot" class="img carrot">
+    <img src="img/carrot.png" alt="carrot" class="img carrot">
+    <img src="img/carrot.png" alt="carrot" class="img carrot">
+    <img src="img/rabbit.png" alt="rabbit" class="img rabbit">
+    <img src="img/carrot.png" alt="carrot" class="img carrot">
+    <img src="img/carrot.png" alt="carrot" class="img carrot">
+    <img src="img/carrot.png" alt="carrot" class="img carrot">
+    <img src="img/carrot.png" alt="carrot" class="img carrot">
+    <script>
+        const findRabbit = document.querySelector('.findRabbitBtn');
+        const rabbitLoc = document.querySelector('.img.rabbit');
+        findRabbit.addEventListener('click', (e) => {
+            rabbitLoc.scrollIntoView({behavior: 'smooth', block: "center"});
+        });
+    </script>
 </body>
 </html>
