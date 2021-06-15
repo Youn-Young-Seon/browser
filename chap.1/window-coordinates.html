@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coordinates</title>
+    <style>
+        .moveBtn{
+            position: fixed;
+            right: 20px;
+        }
+
+        .box{
+            background-color: thistle;
+            margin: 20px 20px;            
+            width: 160px;
+            height: 160px;
+        }
+        .box.active{
+            background-color: violet;
+        }
+    </style>
+</head>
+<body>
+    <div class="moveBtn">
+        <button class="scrollBy">Scroll by 100px(y)</button>
+        <button class="scrollTo">Scroll to 100px(y)</button>
+        <button class="scrollActive">Scroll into active</button>
+    </div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box active"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+    <script>
+        const box = document.querySelector('.box.active');
+        box.addEventListener('click', (event) => {
+            const rect = box.getBoundingClientRect();
+            console.log(rect);
+            console.log(`client: ${event.clientX} ${event.clientY}`);
+            console.log(`page: ${event.pageX} ${event.pageY}`);
+        });
+
+        const scrollBy = document.querySelector('.scrollBy');
+        const scrollTo = document.querySelector('.scrollTo');
+        const scrollActive = document.querySelector('.scrollActive');
+
+        document.addEventListener('click', (event) => {
+            const target = event.target;
+            const scrollY = window.scrollY;
+            if(target.className === 'scrollBy'){
+                // window.scroll(0, scrollY + 100);
+                // window.scrollBy(0, 100);
+                window.scrollBy({top: 100, left: 0, behavior: 'smooth'});
+            }else if(target.className === 'scrollTo'){
+                // window.scroll(0, 100);
+                window.scrollTo(0, 100);
+            }else if(target.className === 'scrollActive'){
+                box.scrollIntoView();                
+            }
+        });
+    </script>
+</body>
+</html>
