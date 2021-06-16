@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shoppingList</title>
+    <style>
+        body{
+            margin: 0;
+            
+        }
+
+        #header .headerDiv{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            width: 100vw;
+            height: 75px;
+            color: white;
+            font-size: 28px;            
+        }
+
+        #body .bodyDiv{
+            width: 100vw;
+            background-color: silver;
+        }
+
+        #body input{
+            width: 100vw;
+            border-style: none;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        #body input:focus{
+            outline: none;
+        }
+
+        #footer .footerDiv{
+            display: flex;
+            justify-content: center;
+            background-color: black;    
+            width: 100vw;
+            height: 75px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        @media screen and (max-width: 768px) {
+
+        }
+    </style>
+</head>
+<body>
+    <section id="header">
+        <div class="headerDiv">Shopping List</div>
+    </section>
+    <section id="body">        
+        <div class="bodyDiv"></div>
+        <input type="text" class="inputText"/>
+    </section>
+    <section id="footer">
+        <div class="footerDiv">
+            <button class="insertBtn"><i class="fa-solid fa-user"></i></button>
+        </div>
+    </section>
+    <script>
+        const inputText = document.querySelector('.inputText');
+        const insertBtn = document.querySelector('.insertBtn');
+        const bodyDiv = document.querySelector('.bodyDiv');
+        const div = document.createElement('div');
+        const trashCan = '<i class="fa-solid fa-user"></i>';
+        insertBtn.addEventListener('click', (e) => {            
+            div.textContent = inputText.value;
+            bodyDiv.appendChild(div);
+            div.innerHTML = trashCan;
+        });
+    </script>
+</body>
+</html>
