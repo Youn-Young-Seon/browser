@@ -2,23 +2,16 @@
 
 import Popup from "./popup.js";
 import Field from "./filed.js";
+import * as sound from './sound.js';
 
 const CARROT_SIZE = 80;
 const CARROT_COUNT = 20;
 const BUG_COUNT = 20;
 const GAME_DURATION_SEC = 20;
 
-const field = document.querySelector('.game__field');
-const fieldRect = field.getBoundingClientRect();
 const gameBtn = document.querySelector('.game__button');
 const timerIndicator = document.querySelector('.game__timer');
 const gameScore = document.querySelector('.game__score');
-
-const carrotSound = new Audio('./sound/carrot_pull.mp3');
-const alertSound = new Audio('./sound/alert.wav');
-const bgSound = new Audio('./sound/bg.mp3');
-const bugSound = new Audio('./sound/bug_pull.mp3');
-const winSound = new Audio('./sound/game_win.mp3');
 
 let started = false;
 let score = 0;
@@ -61,7 +54,7 @@ function startGame() {
   showStopButton();
   showTimerAndScore();
   startGameTimer();
-  playSound(bgSound);
+  sound.playBackground();
 }
 
 function stopGame() {
@@ -69,17 +62,17 @@ function stopGame() {
   stopGameTimer();
   hideGameButton();
   gameFinishBanner.showWithText('REPLAY❓');
-  playSound(alertSound);
-  stopSound(bgSound);
+  sound.playAlert();
+  sound.stopBackground();
 }
 
 function finishGame(win) {
   started = false;
   hideGameButton();
   if (win) {
-    playSound(winSound);
+    sound.playWin();
   } else {
-    playSound(bugSound);
+    sound.playBug();
   }
   stopGameTimer();
   stopSound(bgSound);
@@ -131,36 +124,12 @@ function initGame() {
   gameField.init();
 }
 
-function playSound(sound) {
-  sound.currentTime = 0;
-  sound.play();
-}
 
-function stopSound(sound) {
-  sound.pause();
-}
 
 function updateScoreBoard() {
   gameScore.innerText = CARROT_COUNT - score;
 }
 
-function addItem(className, count, imgPath) {
-  const x1 = 0;
-  const y1 = 0;
-  const x2 = fieldRect.width - CARROT_SIZE;
-  const y2 = fieldRect.height - CARROT_SIZE;
-  for (let i = 0; i < count; i++) {
-    const item = document.createElement('img');
-    item.setAttribute('class', className);
-    item.setAttribute('src', imgPath);
-    item.style.position = 'absolute';
-    const x = randomNumber(x1, x2);
-    const y = randomNumber(y1, y2);
-    item.style.left = `${x}px`;
-    item.style.top = `${y}px`;
-    field.appendChild(item);
-  }
-}
 
 function randomNumber(min, max) {
   return Math.random() * (max - min) + min;
